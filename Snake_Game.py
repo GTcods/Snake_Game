@@ -132,9 +132,9 @@ class Stats:
                               coloraxis_colorbar={
                                   'tickfont': {'family': 'Arial', 'size': 20, 'color': 'white'}})
 
-        pio.write_image(heatmap, "Game/Graphics/stats.png")
+        pio.write_image(heatmap, "Graphics/stats.png")
 
-        self.image = pygame.image.load("Game/Graphics/stats.png")
+        self.image = pygame.image.load("Graphics/stats.png")
         cropped_rect = pygame.Rect(140, 30, 560, 420)
         self.image = self.image.subsurface(cropped_rect)
         self.image = pygame.transform.scale(self.image, (screen_x * block_size / 1.5, screen_y * block_size / 2.2))
@@ -255,7 +255,7 @@ class Apple:
 block_size = 30
 screen_x, screen_y = 20, 20
 
-frame = pygame.image.load('Game/Graphics/square-frame.jpeg')
+frame = pygame.image.load('Graphics/square-frame.jpeg')
 
 # eating_sfx = pygame.mixer.Sound('Game/Sounds/eating-sound.wav')
 
