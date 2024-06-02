@@ -9,6 +9,8 @@ import plotly.express as px
 from Buttons import Button, RectButton, CircleButton
 
 pygame.init()
+
+
 # pygame.mixer.pre_init(44100, -16, 2, 512)
 # pygame.mixer.init()
 
@@ -217,7 +219,7 @@ class Apple:
         self.x = random.randint(1, screen_x - 3)
         self.y = random.randint(1, screen_y - 3)
         self.block = Vector2(self.x, self.y)
-        self.color = (230, 72, 27)
+        self.color = (201, 0, 0)
         self.leaf_color = (0, 200, 0)
         self.duration = time.time()
 
@@ -299,7 +301,8 @@ def menu_loop():
         no_color = (53, 222, 139)
         yes_color = "black"
 
-    play_button = RectButton(block_size * (screen_x // 2 - 1.5), block_size * (screen_y / 2 + 2), block_size * 3, block_size,
+    play_button = RectButton(block_size * (screen_x // 2 - 1.5), block_size * (screen_y / 2 + 2), block_size * 3,
+                             block_size,
                              "black", "Play", "Impact", "white",
                              15, 1, "white", "grey")
 
@@ -308,12 +311,12 @@ def menu_loop():
                                15, 1, "white", border_color)
 
     without_button = RectButton(screen_x * block_size / 8, block_size * (screen_y / 2 - 2), block_size * 3, block_size,
-                           no_color, "Without", "Impact", "white",
-                           13, 1, "white", (53, 222, 139))
+                                no_color, "Without", "Impact", "white",
+                                13, 1, "white", (53, 222, 139))
 
     with_button = RectButton(screen_x * block_size / 3.7, block_size * (screen_y / 2 - 2), block_size * 3, block_size,
-                            yes_color, "With", "Impact", "white",
-                            13, 1, "white", "orange")
+                             yes_color, "With", "Impact", "white",
+                             13, 1, "white", "orange")
 
     difficulty_button = RectButton(block_size * (screen_x / 2 + 3), block_size * screen_y / 2, block_size * 3,
                                    block_size,
@@ -324,7 +327,8 @@ def menu_loop():
                              easy_color, "Easy", "Impact", "white",
                              13, 1, "white", (53, 222, 139))
 
-    medium_button = RectButton(block_size * (screen_x / 2 + 3), block_size * (screen_y / 2 - 2), block_size * 3, block_size,
+    medium_button = RectButton(block_size * (screen_x / 2 + 3), block_size * (screen_y / 2 - 2), block_size * 3,
+                               block_size,
                                medium_color, "Medium", "Impact", "white",
                                13, 1, "white", "orange")
 
@@ -543,7 +547,7 @@ def game_over_loop():
     text_surface = my_font1.render("GAME OVER!", True, "White")
     text_rect = text_surface.get_rect(center=(screen_x * block_size // 2, screen_y * block_size // 8))
 
-    menu_button = RectButton(block_size / 2, block_size / 2, block_size * 3, block_size,
+    menu_button = RectButton(block_size / 2, block_size / 2, block_size * 2, block_size,
                              "black", "Menu", "Impact", "white",
                              15, 1, "white", "grey")
 
