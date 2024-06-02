@@ -9,6 +9,7 @@ import plotly.express as px
 from Buttons import Button, RectButton, CircleButton
 
 pygame.init()
+
 # pygame.mixer.pre_init(44100, -16, 2, 512)
 # pygame.mixer.init()
 
@@ -299,7 +300,8 @@ def menu_loop():
         no_color = (53, 222, 139)
         yes_color = "black"
 
-    play_button = RectButton(block_size * (screen_x // 2 - 1.5), block_size * (screen_y / 2 + 2), block_size * 3, block_size,
+    play_button = RectButton(block_size * (screen_x // 2 - 1.5), block_size * (screen_y / 2 + 2), block_size * 3,
+                             block_size,
                              "black", "Play", "Impact", "white",
                              15, 1, "white", "grey")
 
@@ -308,12 +310,12 @@ def menu_loop():
                                15, 1, "white", border_color)
 
     without_button = RectButton(screen_x * block_size / 8, block_size * (screen_y / 2 - 2), block_size * 3, block_size,
-                           no_color, "Without", "Impact", "white",
-                           13, 1, "white", (53, 222, 139))
+                                no_color, "Without", "Impact", "white",
+                                13, 1, "white", (53, 222, 139))
 
     with_button = RectButton(screen_x * block_size / 3.7, block_size * (screen_y / 2 - 2), block_size * 3, block_size,
-                            yes_color, "With", "Impact", "white",
-                            13, 1, "white", "orange")
+                             yes_color, "With", "Impact", "white",
+                             13, 1, "white", "orange")
 
     difficulty_button = RectButton(block_size * (screen_x / 2 + 3), block_size * screen_y / 2, block_size * 3,
                                    block_size,
@@ -324,8 +326,8 @@ def menu_loop():
                              easy_color, "Easy", "Impact", "white",
                              13, 1, "white", (53, 222, 139))
 
-    medium_button = RectButton(block_size * (screen_x / 2 + 3), block_size * (screen_y / 2 - 2), block_size * 3, block_size,
-                               medium_color, "Medium", "Impact", "white",
+    medium_button = RectButton(block_size * (screen_x / 2 + 3), block_size * (screen_y / 2 - 2), block_size * 3,
+                               block_size, medium_color, "Medium", "Impact", "white",
                                13, 1, "white", "orange")
 
     hard_button = RectButton(screen_x * 0.8 * block_size, block_size * (screen_y / 2 - 2), block_size * 3, block_size,
