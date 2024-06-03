@@ -149,27 +149,17 @@ class Snake:
         self.blocks = [self.head, self.head - Vector2(1, 0), self.head - Vector2(2, 0)]
         self.direction = Vector2(1, 0)
         self.length = len(self.blocks)
-        # self.color = (209, 90, 135)
         self.color = (232, 115, 107)
 
     def draw_snake(self):
         head_rect = pygame.Rect(self.head.x * block_size, self.head.y * block_size, block_size, block_size)
         pygame.draw.rect(main.game.surface, self.color, head_rect)
-        # head_surf = pygame.Surface((block_size, block_size))
-        # head_surf.fill(snake_color)
-        # main_surface.blit(head_surf, (self.head.x * block_size, self.head.y * block_size))
         for v in self.blocks[1:-1]:
             body_rect = pygame.Rect(v.x * block_size, v.y * block_size, block_size, block_size)
             pygame.draw.rect(main.game.surface, self.color, body_rect)
-            # body_surf = pygame.Surface((block_size, block_size))
-            # body_surf.fill(snake_color)
-            # main_surface.blit(body_surf, (v.x * block_size, v.y * block_size))
 
         tail_rect = pygame.Rect(self.blocks[-1].x * block_size, self.blocks[-1].y * block_size, block_size, block_size)
         pygame.draw.rect(main.game.surface, self.color, tail_rect)
-        # tail_surf = pygame.Surface((block_size, block_size))
-        # tail_surf.fill(snake_color)
-        # main_surface.blit(tail_surf, (self.blocks[-1].x * block_size, self.blocks[-1].y * block_size))
 
     def move_snake(self):
         self.head = Vector2(self.blocks[0].x, self.blocks[0].y) + self.direction
@@ -437,7 +427,6 @@ def game_loop():
                         pressed = main.game.snake.change_direction(Vector2(1, 0))
 
         main.game.draw_elements()
-        # screen.blit(main.game.surface, (0, 0))
         pygame.display.update()
         clock.tick(30)
 
