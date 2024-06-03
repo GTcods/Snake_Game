@@ -123,7 +123,7 @@ class Stats:
         for x, y, t in zip(main.game.apple.x_coordinates, main.game.apple.y_coordinates, main.game.apple.durations):
             np_data[y][x] = t
 
-        heatmap = px.imshow(np_data, color_continuous_scale='ylgnbu')
+        heatmap = px.imshow(np_data, color_continuous_scale='aggrnyl')
 
         heatmap.update_layout(plot_bgcolor='black', paper_bgcolor='rgb(24,56,72)',
                               xaxis={
@@ -218,7 +218,7 @@ class Apple:
         self.x = random.randint(1, screen_x - 3)
         self.y = random.randint(1, screen_y - 3)
         self.block = Vector2(self.x, self.y)
-        self.color = (230, 72, 27)
+        self.color = (201, 0, 0)
         self.leaf_color = (0, 200, 0)
         self.duration = time.time()
 
@@ -327,7 +327,12 @@ def menu_loop():
                              13, 1, "white", (53, 222, 139))
 
     medium_button = RectButton(block_size * (screen_x / 2 + 3), block_size * (screen_y / 2 - 2), block_size * 3,
+<<<<<<< HEAD
                                block_size, medium_color, "Medium", "Impact", "white",
+=======
+                               block_size,
+                               medium_color, "Medium", "Impact", "white",
+>>>>>>> e890c355c42ce2d04bd7fd183c5784154f16fa6c
                                13, 1, "white", "orange")
 
     hard_button = RectButton(screen_x * 0.8 * block_size, block_size * (screen_y / 2 - 2), block_size * 3, block_size,
@@ -545,7 +550,7 @@ def game_over_loop():
     text_surface = my_font1.render("GAME OVER!", True, "White")
     text_rect = text_surface.get_rect(center=(screen_x * block_size // 2, screen_y * block_size // 8))
 
-    menu_button = RectButton(block_size / 2, block_size / 2, block_size * 3, block_size,
+    menu_button = RectButton(block_size / 2, block_size / 2, block_size * 2, block_size,
                              "black", "Menu", "Impact", "white",
                              15, 1, "white", "grey")
 
