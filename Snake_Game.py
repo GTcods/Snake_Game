@@ -10,6 +10,7 @@ from Buttons import Button, RectButton, CircleButton
 
 pygame.init()
 
+
 # pygame.mixer.pre_init(44100, -16, 2, 512)
 # pygame.mixer.init()
 
@@ -253,7 +254,7 @@ class Apple:
                          border_top_left_radius=int(0.2 * block_size), border_bottom_right_radius=int(0.2 * block_size))
 
 
-block_size = 30
+block_size = 40
 screen_x, screen_y = 20, 20
 
 frame = pygame.image.load('Graphics/square-frame.jpeg')
@@ -302,7 +303,7 @@ def menu_loop():
         yes_color = (24, 40, 60)
 
     play_button = RectButton(block_size * (screen_x // 2 - 1.5), block_size * (screen_y / 2 + 2), block_size * 3,
-                             block_size,(24, 40, 60), "Play", "Impact", "white",
+                             block_size, (24, 40, 60), "Play", "Impact", "white",
                              15, 1, "white", "grey")
 
     border_button = RectButton(block_size * (screen_x / 2 - 6), block_size * screen_y / 2, block_size * 3, block_size,
