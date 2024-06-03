@@ -9,8 +9,7 @@ import plotly.express as px
 from Buttons import Button, RectButton, CircleButton
 
 pygame.init()
-
-
+pygame.font.init()
 # pygame.mixer.pre_init(44100, -16, 2, 512)
 # pygame.mixer.init()
 
@@ -48,21 +47,23 @@ class Main:
 
 class Game:
     def __init__(self, border=False, speed=150):
+        font = pygame.font.Font(None, 50)
+        self.score = 0
+        self.score_surface = font.render(str(self.score), True, "black")
+        self.score_rect = self.score_surface.get_rect()
+
         self.border = border
         if self.border:
             self.create_border()
         else:
             self.surface = pygame.Surface((block_size * screen_x, block_size * screen_y))
 
-        # self.surface_color = (54, 117, 136)
         self.surface_color = (53, 140, 159)
         self.surface_x, self.surface_y = self.surface.get_size()
 
         self.frame = pygame.transform.scale(frame, ((screen_x + 0.7) * block_size, (screen_y + 0.7) * block_size))
 
-        # self.grass_color = (52, 142, 148)
         self.grass_color = (53, 130, 148)
-        self.score = 0
         self.speed = speed
 
         self.snake = Snake()
@@ -95,12 +96,8 @@ class Game:
                 self.surface.blit(grass, (i * block_size, j * block_size))
 
     def draw_score(self):
-        pygame.font.init()
-        font = pygame.font.Font(None, 50)
-        score_surface = font.render(str(self.score), True, "black")
-        score_rect = score_surface.get_rect()
-        score_rect.center = block_size * (screen_x - 3 / 2), block_size * (3 / 2)
-        self.surface.blit(score_surface, score_rect)
+        self.score_rect.center = self.surface_x - block_size * 3 / 2, block_size * 3 / 2
+        self.surface.blit(self.score_surface, self.score_rect)
 
 
 class Stats:
