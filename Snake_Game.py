@@ -261,7 +261,7 @@ frame = pygame.image.load('Graphics/square-frame.jpeg')
 # eating_sfx = pygame.mixer.Sound('Game/Sounds/eating-sound.wav')
 
 screen = pygame.display.set_mode((block_size * screen_x, block_size * screen_y))
-pygame.display.set_caption('Snake')
+pygame.display.set_caption("Snake")
 clock = pygame.time.Clock()
 
 
@@ -327,8 +327,7 @@ def menu_loop():
                              13, 1, "white", (53, 222, 139))
 
     medium_button = RectButton(block_size * (screen_x / 2 + 3), block_size * (screen_y / 2 - 2), block_size * 3,
-                               block_size,
-                               medium_color, "Medium", "Impact", "white",
+                               block_size, medium_color, "Medium", "Impact", "white",
                                13, 1, "white", "orange")
 
     hard_button = RectButton(screen_x * 0.8 * block_size, block_size * (screen_y / 2 - 2), block_size * 3, block_size,
