@@ -123,7 +123,7 @@ class Stats:
         for x, y, t in zip(main.game.apple.x_coordinates, main.game.apple.y_coordinates, main.game.apple.durations):
             np_data[y][x] = t
 
-        heatmap = px.imshow(np_data, color_continuous_scale='ylgnbu')
+        heatmap = px.imshow(np_data, color_continuous_scale='aggrnyl')
 
         heatmap.update_layout(plot_bgcolor='black', paper_bgcolor='rgb(24,56,72)',
                               xaxis={
