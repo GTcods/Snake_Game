@@ -261,6 +261,7 @@ frame = pygame.image.load('Graphics/square-frame.jpeg')
 # eating_sfx = pygame.mixer.Sound('Game/Sounds/eating-sound.wav')
 
 screen = pygame.display.set_mode((block_size * screen_x, block_size * screen_y))
+pygame.display.set_caption('Snake')
 clock = pygame.time.Clock()
 
 
