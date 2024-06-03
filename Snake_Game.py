@@ -276,37 +276,36 @@ def menu_loop():
     if main.game.speed == 150:
         difficulty_color = (53, 222, 139)
         easy_color = (53, 222, 139)
-        medium_color = "black"
-        hard_color = "black"
+        medium_color = (24, 40, 60)
+        hard_color = (24, 40, 60)
     elif main.game.speed == 100:
         difficulty_color = "orange"
-        easy_color = "black"
+        easy_color = (24, 40, 60)
         medium_color = "orange"
-        hard_color = "black"
+        hard_color = (24, 40, 60)
     else:
         difficulty_color = "red"
-        easy_color = "black"
-        medium_color = "black"
+        easy_color = (24, 40, 60)
+        medium_color = (24, 40, 60)
         hard_color = "red"
 
     if main.game.border:
         border_text = "Border"
         border_color = "orange"
-        no_color = "black"
+        no_color = (24, 40, 60)
         yes_color = "orange"
     else:
         border_text = "!Border"
         border_color = (53, 222, 139)
         no_color = (53, 222, 139)
-        yes_color = "black"
+        yes_color = (24, 40, 60)
 
     play_button = RectButton(block_size * (screen_x // 2 - 1.5), block_size * (screen_y / 2 + 2), block_size * 3,
-                             block_size,
-                             "black", "Play", "Impact", "white",
+                             block_size,(24, 40, 60), "Play", "Impact", "white",
                              15, 1, "white", "grey")
 
     border_button = RectButton(block_size * (screen_x / 2 - 6), block_size * screen_y / 2, block_size * 3, block_size,
-                               "black", border_text, "Impact", "white",
+                               (24, 40, 60), border_text, "Impact", "white",
                                15, 1, "white", border_color)
 
     without_button = RectButton(screen_x * block_size / 8, block_size * (screen_y / 2 - 2), block_size * 3, block_size,
@@ -319,7 +318,7 @@ def menu_loop():
 
     difficulty_button = RectButton(block_size * (screen_x / 2 + 3), block_size * screen_y / 2, block_size * 3,
                                    block_size,
-                                   "black", "Difficulty", "Impact", "white",
+                                   (24, 40, 60), "Difficulty", "Impact", "white",
                                    15, 1, "white", difficulty_color)
 
     easy_button = RectButton(block_size * (screen_x / 2), block_size * (screen_y / 2 - 2), block_size * 3, block_size,
@@ -351,21 +350,21 @@ def menu_loop():
                         main.game.speed = 150
                         difficulty_button.hover_color = (53, 222, 139)
                         easy_button.color = (53, 222, 139)
-                        medium_button.color = "black"
-                        hard_button.color = "black"
+                        medium_button.color = (24, 40, 60)
+                        hard_button.color = (24, 40, 60)
                         difficulty_pressed = False
                     if medium_button.check_if_clicked(mouse_pos):
                         main.game.speed = 100
                         difficulty_button.hover_color = "orange"
-                        easy_button.color = "black"
+                        easy_button.color = (24, 40, 60)
                         medium_button.color = "orange"
-                        hard_button.color = "black"
+                        hard_button.color = (24, 40, 60)
                         difficulty_pressed = False
                     if hard_button.check_if_clicked(mouse_pos):
                         main.game.speed = 80
                         difficulty_button.hover_color = "red"
-                        easy_button.color = "black"
-                        medium_button.color = "black"
+                        easy_button.color = (24, 40, 60)
+                        medium_button.color = (24, 40, 60)
                         hard_button.color = "red"
                         difficulty_pressed = False
                 if border_pressed:
@@ -375,7 +374,7 @@ def menu_loop():
                         border_button.hover_color = (53, 222, 139)
                         border_button.change_text("!Border")
                         without_button.color = (53, 222, 139)
-                        with_button.color = "black"
+                        with_button.color = (24, 40, 60)
                         main.game.surface = pygame.Surface((screen_x * block_size, screen_y * block_size))
                         main.game.surface_x, main.game.surface_y = main.game.surface.get_size()
                     if with_button.check_if_clicked(mouse_pos):
@@ -384,7 +383,7 @@ def menu_loop():
                         border_button.hover_color = "orange"
                         border_button.change_text("Border")
                         with_button.color = "orange"
-                        without_button.color = "black"
+                        without_button.color = (24, 40, 60)
                         main.game.create_border()
                 if border_button.check_if_clicked(mouse_pos):
                     if border_pressed:
@@ -396,7 +395,6 @@ def menu_loop():
                         difficulty_pressed = False
                     else:
                         difficulty_pressed = True
-                    # Button.draw_buttons(easy_button, medium_button, hard_button, screen=screen)
                 if play_button.check_if_clicked(mouse_pos):
                     game_loop()
 
@@ -449,19 +447,19 @@ def pause_loop():
     pause_surface.fill((24, 56, 72, 200))
 
     resume_button = RectButton(block_size, block_size * 2, block_size * 3, block_size,
-                               "black", "Resume", "Impact", "white",
+                               (24, 40, 60), "Resume", "Impact", "white",
                                15, 1, "white", "grey")
 
     menu_button = RectButton(block_size, block_size * 4, block_size * 3, block_size,
-                             "black", "Menu", "Impact", "white",
+                             (24, 40, 60), "Menu", "Impact", "white",
                              15, 1, "white", "grey")
 
     stats_button = RectButton(block_size, block_size * 6, block_size * 3, block_size,
-                              "black", "Stats", "Impact", "white",
+                              (24, 40, 60), "Stats", "Impact", "white",
                               15, 1, "white", "grey")
 
     quit_button = RectButton(block_size, block_size * 8, block_size * 3, block_size,
-                             "black", "Quit", "Impact", "white",
+                             (24, 40, 60), "Quit", "Impact", "white",
                              15, 1, "white", "grey")
 
     main.stats.pause_timer = time.time()
@@ -513,7 +511,7 @@ def stats_loop():
     text_rect.center = (block_size * screen_x / 2, block_size * screen_y / 8)
 
     back_button = RectButton(block_size / 2, block_size / 2, block_size * 3, block_size,
-                             "black", "Back", "Impact", "white",
+                             (24, 40, 60), "Back", "Impact", "white",
                              15, 1, "white", "grey")
 
     while True:
@@ -547,7 +545,7 @@ def game_over_loop():
     text_rect = text_surface.get_rect(center=(screen_x * block_size // 2, screen_y * block_size // 8))
 
     menu_button = RectButton(block_size / 2, block_size / 2, block_size * 2, block_size,
-                             "black", "Menu", "Impact", "white",
+                             (24, 40, 60), "Menu", "Impact", "white",
                              15, 1, "white", "grey")
 
     restart_button = CircleButton(block_size * screen_x / 2, (screen_y - 4) * block_size, block_size * 2, (24, 56, 72),
