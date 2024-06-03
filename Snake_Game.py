@@ -47,10 +47,8 @@ class Main:
 
 class Game:
     def __init__(self, border=False, speed=150):
-        font = pygame.font.Font(None, 50)
         self.score = 0
-        self.score_surface = font.render(str(self.score), True, "black")
-        self.score_rect = self.score_surface.get_rect()
+        self.font = pygame.font.SysFont("Arial", 40)
 
         self.border = border
         if self.border:
@@ -96,8 +94,10 @@ class Game:
                 self.surface.blit(grass, (i * block_size, j * block_size))
 
     def draw_score(self):
-        self.score_rect.center = self.surface_x - block_size * 3 / 2, block_size * 3 / 2
-        self.surface.blit(self.score_surface, self.score_rect)
+        score_surface = self.font.render(str(self.score), True, "black")
+        score_rect = score_surface.get_rect()
+        score_rect.center = self.surface_x - block_size * 3 / 2, block_size * 3 / 2
+        self.surface.blit(score_surface, score_rect)
 
 
 class Stats:
@@ -230,7 +230,9 @@ class Apple:
         self.block = Vector2(self.x, self.y)
 
         while self.block in main.game.snake.blocks:
-            self.randomize()
+            self.x = random.randint(1, screen_x - 3)
+            self.y = random.randint(1, screen_y - 3)
+            self.block = Vector2(self.x, self.y)
 
         self.durations.append(time.time() - self.duration)
         self.duration = time.time()
@@ -441,7 +443,7 @@ def game_loop():
 
 
 def pause_loop():
-    pause_surface = pygame.Surface((block_size * (screen_x / 4), block_size * screen_y), pygame.SRCALPHA)
+    pause_surface = pygame.Surface((block_size * 5, block_size * screen_y), pygame.SRCALPHA)
     pause_surface.fill((24, 56, 72, 200))
 
     resume_button = RectButton(block_size, block_size * 2, block_size * 3, block_size,
