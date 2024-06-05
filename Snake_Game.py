@@ -47,10 +47,8 @@ class Main:
 
 class Game:
     def __init__(self, border=False, speed=150):
-        font = pygame.font.Font(None, 50)
+        self.font = pygame.font.Font(None, 50)
         self.score = 0
-        self.score_surface = font.render(str(self.score), True, "black")
-        self.score_rect = self.score_surface.get_rect()
 
         self.border = border
         if self.border:
@@ -96,6 +94,8 @@ class Game:
                 self.surface.blit(grass, (i * block_size, j * block_size))
 
     def draw_score(self):
+        self.score_surface = self.font.render(str(self.score), True, "black")
+        self.score_rect = self.score_surface.get_rect()
         self.score_rect.center = self.surface_x - block_size * 3 / 2, block_size * 3 / 2
         self.surface.blit(self.score_surface, self.score_rect)
 
