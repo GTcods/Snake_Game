@@ -10,8 +10,8 @@ from Buttons import Button, RectButton, CircleButton
 
 pygame.init()
 pygame.font.init()
-# pygame.mixer.pre_init(44100, -16, 2, 512)
-# pygame.mixer.init()
+pygame.mixer.pre_init(44100, -16, 2, 512)
+pygame.mixer.init()
 
 
 class Main:
@@ -47,8 +47,10 @@ class Main:
 
 class Game:
     def __init__(self, border=False, speed=150):
+        font = pygame.font.Font(None, 50)
         self.score = 0
-        self.font = pygame.font.SysFont("Arial", 40)
+        self.score_surface = font.render(str(self.score), True, "black")
+        self.score_rect = self.score_surface.get_rect()
 
         self.border = border
         if self.border:
@@ -94,10 +96,8 @@ class Game:
                 self.surface.blit(grass, (i * block_size, j * block_size))
 
     def draw_score(self):
-        score_surface = self.font.render(str(self.score), True, "black")
-        score_rect = score_surface.get_rect()
-        score_rect.center = self.surface_x - block_size * 3 / 2, block_size * 3 / 2
-        self.surface.blit(score_surface, score_rect)
+        self.score_rect.center = self.surface_x - block_size * 3 / 2, block_size * 3 / 2
+        self.surface.blit(self.score_surface, self.score_rect)
 
 
 class Stats:
@@ -152,14 +152,108 @@ class Snake:
         self.color = (232, 115, 107)
 
     def draw_snake(self):
-        head_rect = pygame.Rect(self.head.x * block_size, self.head.y * block_size, block_size, block_size)
-        pygame.draw.rect(main.game.surface, self.color, head_rect)
-        for v in self.blocks[1:-1]:
-            body_rect = pygame.Rect(v.x * block_size, v.y * block_size, block_size, block_size)
-            pygame.draw.rect(main.game.surface, self.color, body_rect)
+        for i, v in enumerate(self.blocks):
+            x = v.x
+            y = v.y
+            if i == 0:
+                self.draw_head(x, y)
+            elif i == len(self.blocks) - 1:
+                self.draw_tail(x, y)
+            else:
+                body_rect = pygame.Rect(v.x * block_size, v.y * block_size, block_size, block_size)
+                pygame.draw.rect(main.game.surface, self.color, body_rect)
 
-        tail_rect = pygame.Rect(self.blocks[-1].x * block_size, self.blocks[-1].y * block_size, block_size, block_size)
-        pygame.draw.rect(main.game.surface, self.color, tail_rect)
+    def draw_head(self, x, y):
+        head_rect = pygame.Rect(x * block_size, y * block_size, block_size, block_size)
+        if self.direction == (1, 0):
+            pygame.draw.rect(main.game.surface, self.color, head_rect, border_top_right_radius=10,
+                             border_bottom_right_radius=10)
+            pygame.draw.circle(main.game.surface, self.color, ((x + 0.3) * block_size,
+                                                               (y + 0.1) * block_size), block_size / 4)
+            pygame.draw.circle(main.game.surface, "white", ((x + 0.3) * block_size,
+                                                            (y + 0.1) * block_size), block_size / 6)
+            pygame.draw.circle(main.game.surface, "black", ((x + 0.39) * block_size,
+                                                            (y + 0.1) * block_size), block_size / 10)
+            pygame.draw.circle(main.game.surface, self.color, ((x + 0.3) * block_size,
+                                                               (y + 0.9) * block_size), block_size / 4)
+            pygame.draw.circle(main.game.surface, "white", ((x + 0.3) * block_size,
+                                                            (y + 0.9) * block_size), block_size / 6)
+            pygame.draw.circle(main.game.surface, "black", ((x + 0.39) * block_size,
+                                                            (y + 0.9) * block_size), block_size / 10)
+
+        elif self.direction == (-1, 0):
+            pygame.draw.rect(main.game.surface, self.color, head_rect, border_top_left_radius=10,
+                             border_bottom_left_radius=10)
+            pygame.draw.circle(main.game.surface, self.color, ((self.head.x + 0.7) * block_size,
+                                                               (self.head.y + 0.1) * block_size), block_size / 4)
+            pygame.draw.circle(main.game.surface, "white", ((self.head.x + 0.7) * block_size,
+                                                            (self.head.y + 0.1) * block_size), block_size / 6)
+            pygame.draw.circle(main.game.surface, "black", ((self.head.x + 0.63) * block_size,
+                                                            (self.head.y + 0.1) * block_size), block_size / 10)
+            pygame.draw.circle(main.game.surface, self.color, ((self.head.x + 0.7) * block_size,
+                                                               (self.head.y + 0.9) * block_size), block_size / 4)
+            pygame.draw.circle(main.game.surface, "white", ((self.head.x + 0.7) * block_size,
+                                                            (self.head.y + 0.9) * block_size), block_size / 6)
+            pygame.draw.circle(main.game.surface, "black", ((self.head.x + 0.63) * block_size,
+                                                            (self.head.y + 0.9) * block_size), block_size / 10)
+        elif self.direction == (0, 1):
+            pygame.draw.rect(main.game.surface, self.color, head_rect, border_bottom_left_radius=10,
+                             border_bottom_right_radius=10)
+            pygame.draw.circle(main.game.surface, self.color, ((self.head.x + 0.1) * block_size,
+                                                               (self.head.y + 0.3) * block_size), block_size / 4)
+            pygame.draw.circle(main.game.surface, "white", ((self.head.x + 0.1) * block_size,
+                                                            (self.head.y + 0.3) * block_size), block_size / 6)
+            pygame.draw.circle(main.game.surface, "black", ((self.head.x + 0.1) * block_size,
+                                                            (self.head.y + 0.39) * block_size), block_size / 10)
+            pygame.draw.circle(main.game.surface, self.color, ((self.head.x + 0.9) * block_size,
+                                                               (self.head.y + 0.3) * block_size), block_size / 4)
+            pygame.draw.circle(main.game.surface, "white", ((self.head.x + 0.9) * block_size,
+                                                            (self.head.y + 0.3) * block_size), block_size / 6)
+            pygame.draw.circle(main.game.surface, "black", ((self.head.x + 0.9) * block_size,
+                                                            (self.head.y + 0.39) * block_size), block_size / 10)
+
+        else:
+            pygame.draw.rect(main.game.surface, self.color, head_rect, border_top_left_radius=10,
+                             border_top_right_radius=10)
+            pygame.draw.circle(main.game.surface, self.color, ((self.head.x + 0.1) * block_size,
+                                                               (self.head.y + 0.7) * block_size), block_size / 4)
+            pygame.draw.circle(main.game.surface, "white", ((self.head.x + 0.1) * block_size,
+                                                            (self.head.y + 0.7) * block_size), block_size / 6)
+            pygame.draw.circle(main.game.surface, "black", ((self.head.x + 0.1) * block_size,
+                                                            (self.head.y + 0.63) * block_size), block_size / 10)
+            pygame.draw.circle(main.game.surface, self.color, ((self.head.x + 0.9) * block_size,
+                                                               (self.head.y + 0.7) * block_size), block_size / 4)
+            pygame.draw.circle(main.game.surface, "white", ((self.head.x + 0.9) * block_size,
+                                                            (self.head.y + 0.7) * block_size), block_size / 6)
+            pygame.draw.circle(main.game.surface, "black", ((self.head.x + 0.9) * block_size,
+                                                            (self.head.y + 0.63) * block_size), block_size / 10)
+
+    def draw_tail(self, x, y):
+        if self.blocks[-2].y == y:
+            tail_rect = pygame.Rect(x * block_size, y * block_size, block_size, block_size * 0.9)
+            tail_rect.center = ((x + 0.5) * block_size, (y + 0.5) * block_size)
+            if self.blocks[-2].x > x:
+                pygame.draw.rect(main.game.surface, self.color, tail_rect, border_top_left_radius=10,
+                                 border_bottom_left_radius=10)
+            else:
+                pygame.draw.rect(main.game.surface, self.color, tail_rect, border_top_right_radius=10,
+                                 border_bottom_right_radius=10)
+        elif self.blocks[-2].x == x:
+            tail_rect = pygame.Rect(x * block_size, y * block_size, block_size * 0.9, block_size)
+            tail_rect.center = ((x + 0.5) * block_size, (y + 0.5) * block_size)
+            if self.blocks[-2].y > y:
+                pygame.draw.rect(main.game.surface, self.color, tail_rect, border_top_left_radius=10,
+                                 border_top_right_radius=10)
+            else:
+                pygame.draw.rect(main.game.surface, self.color, tail_rect, border_bottom_right_radius=10,
+                                 border_bottom_left_radius=10)
+
+    def change_direction(self, direction):
+        if direction != -self.direction:
+            self.direction = direction
+            return True
+        else:
+            return False
 
     def move_snake(self):
         self.head = Vector2(self.blocks[0].x, self.blocks[0].y) + self.direction
@@ -179,17 +273,10 @@ class Snake:
 
     def eaten_apple(self):
         if self.head == main.game.apple.block:
-            # eating_sfx.play()
+            eating_sfx.play()
             main.game.score += 1
             main.game.apple.randomize()
             return True
-
-    def change_direction(self, direction):
-        if direction != -self.direction:
-            self.direction = direction
-            return True
-        else:
-            return False
 
     def check_collision(self):
         if self.head in self.blocks:
@@ -220,9 +307,7 @@ class Apple:
         self.block = Vector2(self.x, self.y)
 
         while self.block in main.game.snake.blocks:
-            self.x = random.randint(1, screen_x - 3)
-            self.y = random.randint(1, screen_y - 3)
-            self.block = Vector2(self.x, self.y)
+            self.randomize()
 
         self.durations.append(time.time() - self.duration)
         self.duration = time.time()
@@ -248,7 +333,7 @@ screen_x, screen_y = 20, 20
 
 frame = pygame.image.load('Graphics/square-frame.jpeg')
 
-# eating_sfx = pygame.mixer.Sound('Game/Sounds/eating-sound.wav')
+eating_sfx = pygame.mixer.Sound('Sounds/eating-sound.wav')
 
 screen = pygame.display.set_mode((block_size * screen_x, block_size * screen_y))
 pygame.display.set_caption("Snake")
@@ -427,12 +512,13 @@ def game_loop():
                         pressed = main.game.snake.change_direction(Vector2(1, 0))
 
         main.game.draw_elements()
+        # screen.blit(main.game.surface, (0, 0))
         pygame.display.update()
         clock.tick(30)
 
 
 def pause_loop():
-    pause_surface = pygame.Surface((block_size * 5, block_size * screen_y), pygame.SRCALPHA)
+    pause_surface = pygame.Surface((block_size * (screen_x / 4), block_size * screen_y), pygame.SRCALPHA)
     pause_surface.fill((24, 56, 72, 200))
 
     resume_button = RectButton(block_size, block_size * 2, block_size * 3, block_size,
@@ -473,9 +559,6 @@ def pause_loop():
                     stats_loop()
                 if quit_button.check_if_clicked(mouse_pos):
                     main.quit_game()
-
-        main.game.apple.draw_apple()
-        main.game.snake.draw_snake()
 
         if main.game.border:
             screen.blit(main.game.surface, (block_size, block_size))
